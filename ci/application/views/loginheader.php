@@ -34,12 +34,12 @@
 <ul>
 
 <li> <a href="#home.php">Home</a> </li>
-<li> <a href="<?php echo base_url('data/auth')?>">profile</a></li>
-<li> <a href="<?php echo base_url('data/update')?>">update</a></li>
-  <li> <a href="<?php echo base_url('data/updatepass')?>">updatepassword</a></li>
+<li> <a href="<?php echo base_url('User_controller/auth')?>">profile</a></li>
+<li> <a href="<?php echo base_url('User_controller/update')?>">update</a></li>
+  <li> <a href="<?php echo base_url('User_controller/updatepass')?>">updatepassword</a></li>
 <!--<li> <a href="update.php?se=<?php echo    $_SESSION["update"]  ?> ">Update</a></li> -->
 <li><a href="contact.php">contact us</a></li>
- <li> <a href="<?php echo base_url('data/loc')?>">Logout</a></li>
+ <li> <a href="<?php echo base_url('User_controller/loc')?>">Logout</a></li>
   </ul>
 
 </nav><br />

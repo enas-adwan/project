@@ -12,29 +12,29 @@ $this->load->library('session');
 $this->load->model('User_model');
 
     $this->load->library('form_validation');
-     
+
 
  // if( $this->session->loginflag){
- 
+
                    
           //echo $data;
-       
+
                 foreach ($res as $reso => $list) {
-                    foreach ($res as $reso => $listt) {  
+                    foreach ($res as $reso => $listt) {
 
 $name= $listt['name'] ;
 $email=$listt['email'] ;
 $image=$listt['image'];
 $phone=$listt['phone'];
                     }
-                
+
 }
 
 
  echo"<br>";
-      
+
    // $this->load->view('reg.php?action=logout');
-                     
+
  // }
 ?>
 
@@ -84,14 +84,14 @@ $phone=$listt['phone'];
 <?php
 
 
-    
+
             echo "  Welcom  ";
-            
+
           echo $name;
-       echo"<br />";  
+       echo"<br />";
        echo $email;
        echo "<br />";
-       echo $phone;    
+       echo $phone;
 ?>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <!--<form method="post" action="log.php" enctype="multipart/form-data">

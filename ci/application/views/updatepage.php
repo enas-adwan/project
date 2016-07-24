@@ -454,7 +454,7 @@ $('#previewing').attr('src', e.target.result);
 ?>
 
 <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-           name:  <input type="text" class="form-control  required changename"  name="name" id="name"  >
+           name:  <input type="text" class="form-control  required changename"  name="name" id="name"  placeholder="<?php echo $name;?>">
               <br>
                <span class="error"  id="nameerr" name="nameerr" ></span>
          <?php echo form_error('name'); ?>
@@ -485,7 +485,7 @@ $('#previewing').attr('src', e.target.result);
 ?>
 
 <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-           email:  <input type="text" class="form-control  required changeemail"  name="changeemail" id="changeemail"  >
+           email:  <input type="text" class="form-control  required changeemail" placeholder="<?php echo $email;?>" name="changeemail" id="changeemail"  >
               <br>
                <span class="error"  id="emailerr" name="emailerr" ></span>
          <?php echo form_error('changeemail'); ?>
@@ -515,7 +515,7 @@ $('#previewing').attr('src', e.target.result);
 ?>
 
 <input type="hidden" name="<?=$csrf['name'];?>" value="<?=$csrf['hash'];?>" />
-           phone:  <input type="tel" class="form-control  required changephone"  name="changephone" id="changephone"  >
+           phone:  <input type="tel" class="form-control  required changephone"placeholder="<?php echo $phone;?>"name="changephone" id="changephone"  >
               <br>
                <span class="error"  id="phoneerr" name="phoneerr" ></span>
          <?php echo form_error('changeemail'); ?>

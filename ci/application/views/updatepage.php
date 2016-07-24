@@ -5,14 +5,14 @@ $name="anoos";
 $id=$this->session->id;
 
 
-  $this->load->helper("url");
-    $this->load->database();
-   $this->load->library('upload');
+$this->load->helper("url");
+$this->load->database();
+$this->load->library('upload');
 $this->load->helper('security');
 $this->load->helper('string');
 
- $this->load->library('email');
-  $this->load->helper('form');
+$this->load->library('email');
+$this->load->helper('form');
 $this->load->library('session');
 $this->load->model('User_model');
 

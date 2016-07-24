@@ -10,43 +10,35 @@ $msg=$name=$password=$passwordconfirm=$email=$gender=$birthday=$phone=$city=$sta
 
 if( $this->session->flashdata('verification')){
 
-$msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
+     $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
 
-   print '<br /><br /><br /><br /> <div id="h"  class="alert alert-success">
+     print '<br /><br /><br /><br /> <div id="h"  class="alert alert-success">
      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
      <strong>Success!</strong>  ' . $msg . '
+     </div> ';
+
+}
+if( $this->session->flashdata( 'verificationdone')){
+
+	    $msg="your account has been activated";
+      print ' <br /><br /><br /><br /><br /><div id="h"  class="alert alert-success">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong>Success!</strong>  ' . $msg . '
+      </div> ';
 
 
+}
 
-    </div> ';
-
- }
- if( $this->session->flashdata( 'verificationdone')){
-
-	       $msg="your account has been activated";
-           print ' <br /><br /><br /><br /><br /><div id="h"  class="alert alert-success">
-             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-             <strong>Success!</strong>  ' . $msg . '
-
-
-
-            </div> ';
-
-
- }
-  if($this->session->databaseerr==1){
+if($this->session->databaseerr==1){
 
 
     print ' <br /><br /><br /><br /><div id="h2"  class="alert alert-danger fade in">
-                      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                      <strong>Error!!</strong>  '.$err.'
-																						    <br>
-																						a msg has been sent to the adminstration about this error please try later!
-																						thanks for your patient
-
-
-
-                     </div> ';
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Error!!</strong>  '.$err.'
+	  <br>
+		a msg has been sent to the adminstration about this error please try later!
+		thanks for your patient
+    </div> ';
 
 		$this->session->unset_userdata('databaseerr');
 
@@ -56,18 +48,17 @@ $msg = 'Your account has been made, <br /> please verify it by clicking the acti
 
  if($this->session->notauthenticate==1){
 
-	$loginErr="you are not authinticated";
-
-	$this->session->unset_userdata('notauthenticate');
+	  $loginErr="you are not authinticated";
+    $this->session->unset_userdata('notauthenticate');
 
  }
 
  if( $this->session->wrongpassword==1){
- 	$loginErr="wrong password";
 
-	$this->session->unset_userdata('wrongpassword');
+ 	    $loginErr="wrong password";
+      $this->session->unset_userdata('wrongpassword');
 
- }
+  }
 
 
 

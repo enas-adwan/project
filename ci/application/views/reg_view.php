@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang = "en">
-
-   <head>
-      <meta charset = "utf-8">
-      <title>Students Example</title>
-   </head>
-
-   <body>
+<head>
+<meta charset = "utf-8">
+<title>Students Example</title>
+</head>
+ <body>
 
 
       <table border = "1">
@@ -22,7 +20,7 @@
 
             foreach($records as $r) {
                echo "<tr>";
-               echo "<td>".$i++."</td>"; 
+               echo "<td>".$i++."</td>";
                echo "<td>".$r->name."</td>";
 
 

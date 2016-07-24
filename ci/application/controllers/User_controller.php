@@ -95,8 +95,11 @@ class user_controller extends CI_Controller{
 
              );
 
-    	  $data = $this->security->xss_clean($data);
-          $this->User_model->insert($data);//insert the data
+    	    $data = $this->security->xss_clean($data);
+          $user_model_bool  =$this->User_model->insert($data);//insert the data
+           if( !$user_model_bool){
+            $this->load->view('reg');
+           }
           $this->emailVerification($email,$hash); //send a verfication email
 
 
@@ -157,7 +160,10 @@ class user_controller extends CI_Controller{
 
         $email = $_GET['email']; // Set email variable
         $hash = $_GET['hash'];
-        $this->User_model->updateActive($hash,$email);
+        $user_model_bool=$this->User_model->updateActive($hash,$email);
+         if( !$user_model_bool){
+          $this->load->view('reg');
+         }
 
 
           redirect('User_controller/reg','refresh');
@@ -191,8 +197,10 @@ class user_controller extends CI_Controller{
                $password =testInput($this->input->post('password1'));
                $email =testInput($this->input->post('email1'));
 
-               $this->User_model->authUser($email,$password);
-
+               $user_model_bool= $this->User_model->authUser($email,$password);
+                if( !$user_model_bool){
+                  $this->load->view('reg');
+                }
                  if($this->session->loginflag==1){
                      $this->loginUser();
                   }else{
@@ -228,14 +236,15 @@ class user_controller extends CI_Controller{
     public function update(){
 	   if($this->session->loginflag==1)  {// if login flag set go to it
 
-           $email=$this->session->email;
+       $email=$this->session->email;
 		   $res=$this->User_model->selectInfo($email);
 		   $data['res']=$res;
-		    $this->load->view('loginheader');
-           $this->load->view('updatepage',$data);
-                  $this->load->view('footer');
+		   $this->load->view('loginheader');
+       $this->load->view('updatepage',$data);
+       $this->load->view('footer');
+
 		 }else{
-        $this->load->view('reg');
+         $this->load->view('reg');
          $this->load->view('footer');
        }//if login flag not set go to the registration and login page
 
@@ -249,10 +258,10 @@ class user_controller extends CI_Controller{
 
 	public function changePhone(){
 
-		$id=$this->session->id;
-		$email=$this->session->email;
+	  	$id=$this->session->id;
+	  	$email=$this->session->email;
 	    $res=$this->User_model->selectInfo($email);
-		$data['res']=$res;
+	  	$data['res']=$res;
            foreach ($res as $reso => $list) {
              foreach ($res as $reso => $listt) {
 
@@ -271,7 +280,10 @@ class user_controller extends CI_Controller{
             }else {
 
         $newephone=$this->input->post('changephone');
-        $this->User_model->changePhone($id,$newephone);
+        $user_model_bool=$this->User_model->changePhone($id,$newephone);
+        if( !$user_model_bool){
+         $this->load->view('reg');
+        }
         echo $newephone;
         echo " || ";
         echo"<span style='color:green'>updated successfuly</span>";
@@ -288,9 +300,9 @@ class user_controller extends CI_Controller{
     public function changeNamee(){
 
        $id=$this->session->id;
-	   $email=$this->session->email;
-	   $res=$this->User_model->selectInfo($email);
-	   $data['res']=$res;
+	     $email=$this->session->email;
+	     $res=$this->User_model->selectInfo($email);
+	     $data['res']=$res;
           foreach ($res as $reso => $list) {
             foreach ($res as $reso => $listt) {
                $name= $listt['name'] ;
@@ -298,7 +310,7 @@ class user_controller extends CI_Controller{
             }
 
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-	    $this->form_validation->set_rules('name', 'name', 'required|is_unique[reg.name]');
+	      $this->form_validation->set_rules('name', 'name', 'required|is_unique[reg.name]');
 
          if ($this->form_validation->run() == FALSE) {
            echo $name;
@@ -345,7 +357,10 @@ class user_controller extends CI_Controller{
 
          }else {
            $newemail=$this->input->post('changeemail');
-           $this->User_model->changeEmail($id,$newemail);
+           $user_model_bool=$this->User_model->changeEmail($id,$newemail);
+           if( !$user_model_bool){
+            $this->load->view('reg');
+           }
            echo $newemail;
            echo " || ";
            echo"<span style='color:green'>updated successfuly</span>";
@@ -362,8 +377,8 @@ class user_controller extends CI_Controller{
 
       public function changeImage(){
 
-		 $id=$this->session->id;
-		 $email=$this->session->email;
+		   $id=$this->session->id;
+		   $email=$this->session->email;
 	     $res=$this->User_model->selectInfo($email);
 	     $data['res']=$res;
             foreach ($res as $reso => $list) {
@@ -473,19 +488,22 @@ class user_controller extends CI_Controller{
 		     }else {
              $currentpassword =$this->input->post('changepassword');
              $newpassword =$this->input->post('newpassword');
-	         $id=$this->session->id;
+	           $id=$this->session->id;
              $sql = "SELECT password from reg where id=? ";
-			 $query=$this->db->query($sql, $id);
+			       $query=$this->db->query($sql, $id);
              $row = $query->row();
- 	         $password = 	$row->password;
+ 	           $password = 	$row->password;
 
                if(  password_verify($currentpassword,$password)){
                    $email=$this->session->email;
-                   $this->User_model->changePassword($id,$newpassword);
+                   $user_model_bool=$this->User_model->changePassword($id,$newpassword);
                       print ' <br /><br /><br /><br /><div id="h2"  class="alert alert-success">
                       <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                       <strong>Success!</strong>  your password has been changed you can log in with your new password
                      </div> ';
+                     if( !$user_model_bool){
+                       $this->load->view('reg');
+                     }
 
                }else{
                        print ' <br /><br /><br /><br /><div id="h2"  class="alert alert-danger">

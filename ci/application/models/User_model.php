@@ -9,10 +9,11 @@ class dbconerr extends Exception{
 	     //for error handling
 	  public function processError($err) {
 
-		 error_log($err,1,
+		     error_log($err,1,
          "enasadwan1@gmail.com","From: enasadwan1@gmail.com");
-		 $this->session->databaseerr=1;
-         $this->load->view('reg');
+		     $this->session->databaseerr=1;
+				 return false ;
+
       }
 
  }
@@ -70,7 +71,21 @@ class user_model extends CI_Model {
 
 	    $sql=" UPDATE reg SET name=? where id=?";
 	    $query=$this->db->query($sql,array( $namechange,$id));
-		     return true ;
+
+				 try{
+							 if(!$query){
+
+					       throw new dbconerr();
+                 return true ;
+				 }}	catch (dbconerr $e){
+
+						  $err="something happen while connect to the server please try again later  ";
+
+							$e->processError($err);
+
+
+				 }
+
 	 }
 
 
@@ -84,7 +99,20 @@ class user_model extends CI_Model {
      public function changeEmail($id,$newemail){
 	    $sql=" UPDATE reg SET email=? where id=?";
 	    $query=$this->db->query($sql,array( $newemail,$id));
-		  return true ;
+
+			try{
+						if(!$query){
+
+							throw new dbconerr();
+							return true ;
+			}}	catch (dbconerr $e){
+
+					 $err="something happen while connect to the server please try again later  ";
+
+					 $e->processError($err);
+
+
+			}
 	}
 
 
@@ -98,7 +126,20 @@ class user_model extends CI_Model {
     public function changePhone($id,$newphone){
 	    $sql=" UPDATE reg SET phone=? where id=?";
 	    $query=$this->db->query($sql,array( $newphone,$id));
-	      return true ;
+
+				try{
+							if(!$query){
+
+								throw new dbconerr();
+								return true ;
+				}}	catch (dbconerr $e){
+
+						 $err="something happen while connect to the server please try again later  ";
+
+						 $e->processError($err);
+
+
+				}
 	 }
 
 
@@ -114,7 +155,19 @@ class user_model extends CI_Model {
 
         $sql=" UPDATE reg SET image=? where id=?";
 	      $query=$this->db->query($sql,array( $image,$id));
-	    	return true ;
+				try{
+							if(!$query){
+
+								throw new dbconerr();
+								 return true ;
+				}}	catch (dbconerr $e){
+
+						 $err="something happen while connect to the server please try again later  ";
+
+						 $e->processError($err);
+
+
+				}
       }
 
 
@@ -167,7 +220,7 @@ class user_model extends CI_Model {
            $query=$this->db->query($sql, $id);
            $row = $query->row();
 	         $res[]=	array(
-               'name' => 	$row->name,
+                'name' => 	$row->name,
                 'email' => $row->email,
                 'image' =>$row->image,
 	              'phone' => $row->phone
@@ -189,7 +242,20 @@ class user_model extends CI_Model {
 	        $newpassword=password_hash($newpassword, PASSWORD_BCRYPT);
 		      $sql=" UPDATE reg SET password=? where id=?";
 	        $query=$this->db->query($sql,array( $newpassword,$id));
-	          return true ;
+
+						try{
+									if(!query){
+
+										throw new dbconerr();
+										return true ;
+						}}	catch (dbconerr $e){
+
+								 $err="something happen while connect to the server please try again later  ";
+
+								 $e->processError($err);
+
+
+						}
 	    }
 
 
@@ -218,28 +284,28 @@ class user_model extends CI_Model {
 			                  $this->session->id=$row->id;
 				                $this->session->email=$email;
 				                $this->session->loginflag=1;
-                               return 1;
+                               return true;
 				              }else{
 
 					              $this->session->notauthenticate=1;
-					               return 0;
+					               return false;
 					            }
 
 				           }else{
 					            $this->session->notauthenticate=1;
-					            return 0;
+					            return false;
 
 				           }
 
 	              }else{
 
 		              $this->session->wrongpassword=1;
-				        	return 0;
+				        	return false;
 				 	       }
 
 	          	}else{
 					    $this->session->notauthenticate=1;
-					    return 0;
+					    return false;
 
 		       	}
 	     }

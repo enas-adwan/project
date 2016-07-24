@@ -19,26 +19,12 @@ class user_controller extends CI_Controller{
    $this->load->library('session');
    $this->load->model('User_model');
    $this->load->library('form_validation');
+   $this->load->helper('test');//helper done by me to test input to prevent script and html injection
   }
 
 
-  /**
-   * functions to prevent html and xss injection
-   * @param string data
-   * @return string
-   * @author Enas Adwan
-    */
 
-  public function testInput($data){
 
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    $data= strip_tags($data);
-    $data=xss_clean($data);
-    return $data;
-
-  }
 
 
    /**
@@ -90,22 +76,22 @@ class user_controller extends CI_Controller{
           $this->load->library('upload', $config);
           $data_upload_files = $this->upload->data();
           $image = $data_upload_files['full_path'];
-          $email=$this->testInput($this->input->post('email'));
+          $email=testInput($this->input->post('email'));
           $hash= random_string('unique');
-          $password=$this->testInput($this->input->post('password'));
+          $password=testInput($this->input->post('password'));
           $password= password_hash($password, PASSWORD_DEFAULT);
 
           $data=array(
-            'name '=>$this->testInput($this->input->post('name')),
+            'name '=>testInput($this->input->post('name')),
             'password '=>$password,
             'email '=>$email,
-            'gender '=>$this->testInput($this->input->post('gender')),
-            'phone '=>$this->testInput($this->input->post('phone')),
-            'city '=>$this->testInput($this->input->post('city')),
-            'state'=>$this->testInput($this->input->post('state')),
+            'gender '=>testInput($this->input->post('gender')),
+            'phone '=>testInput($this->input->post('phone')),
+            'city '=>testInput($this->input->post('city')),
+            'state'=>testInput($this->input->post('state')),
             'hash' => $hash,
-            'birthday'=>$this->testInput($this->input->post('birthday')),
-            'image'=>$this->testInput($image.$_FILES['img']['name'])
+            'birthday'=>testInput($this->input->post('birthday')),
+            'image'=>testInput($image.$_FILES['img']['name'])
 
              );
 
@@ -202,8 +188,8 @@ class user_controller extends CI_Controller{
                   $this->load->view('footer');
            }else{
 
-               $password =$this->testInput($this->input->post('password1'));
-               $email =$this->testInput($this->input->post('email1'));
+               $password =testInput($this->input->post('password1'));
+               $email =testInput($this->input->post('email1'));
 
                $this->User_model->authUser($email,$password);
 

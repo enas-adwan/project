@@ -70,20 +70,20 @@ class user_controller extends CI_Controller{
      $this->form_validation->set_rules('img', 'Img', 'callback_imgCheck');
      $this->form_validation->set_rules('name', 'Username', 'trim|required|alpha|min_length[3]|max_length[30]|is_unique[reg.name]|xss_clean');
      $this->form_validation->set_rules('email', 'Email ', 'trim|required|valid_email|is_unique[reg.email]');
-	 $this->form_validation->set_rules('phone', 'Home Phone', 'required|regex_match[/^00972-[0-9]{3}-[0-9]{3}-[0-9]{4}$/i]|xss_clean');
-	 $this->form_validation->set_rules('zipcode','zipcode','trim|required|min_length[5]|numeric|xss_clean');
-	 $this->form_validation->set_rules('city', 'City', 'trim|required|max_length[30]|xss_clean');
-	 $this->form_validation->set_rules('state', 'State', 'trim|required|max_length[30]|xss_clean');
-	 $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|max_length[30]|xss_clean');
+	   $this->form_validation->set_rules('phone', 'Home Phone', 'required|regex_match[/^00972-[0-9]{3}-[0-9]{3}-[0-9]{4}$/i]|xss_clean');
+	   $this->form_validation->set_rules('zipcode','zipcode','trim|required|min_length[5]|numeric|xss_clean');
+	   $this->form_validation->set_rules('city', 'City', 'trim|required|max_length[30]|xss_clean');
+	   $this->form_validation->set_rules('state', 'State', 'trim|required|max_length[30]|xss_clean');
+	   $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|max_length[30]|xss_clean');
      $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passwordconfirm]');
      $this->form_validation->set_rules('passwordconfirm', 'Confirm Password', 'trim|required');
 
-       if ($this->form_validation->run() == FALSE) //if there is error load the page to show the error
-        {
+       if ($this->form_validation->run() == FALSE){
+
+            //if there is error load the page to show the error
           $this->load->view('reg');
 
-        }
-        else {
+       }else {
 
           $config['upload_path'] ='./uploads/'; // for the profile photo path
           $this->upload->initialize($config);
@@ -154,7 +154,7 @@ class user_controller extends CI_Controller{
 
    public function reg(){
 
-      $this->load->view('reg');
+       $this->load->view('reg');
        $this->load->view('footer');
    }
 
@@ -168,19 +168,18 @@ class user_controller extends CI_Controller{
    public function verify(){
 
       if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash'])){
+
         $email = $_GET['email']; // Set email variable
         $hash = $_GET['hash'];
         $this->User_model->updateActive($hash,$email);
 
 
           redirect('User_controller/reg','refresh');
-       }
-      else{
+       }else{
 
-
-       redirect('User_controller/reg','refresh');
+        redirect('User_controller/reg','refresh');
        }
-      }
+    }
 
 
       /**
@@ -189,13 +188,11 @@ class user_controller extends CI_Controller{
         */
 
    public function auth(){
-        if($this->session->loginflag==1)//if login flag is set go to profilepage
-        {
-         $this->loginUser();
-        }
+        if($this->session->loginflag==1){//if login flag is set go to profilepage
 
-        else// if login flag not set then we need to see the email and the password
-        {
+         $this->loginUser();
+        }else{// if login flag not set then we need to see the email and the password
+
 
           $this->form_validation->set_rules('email1', 'Email', 'required|valid_email'); // Validation for E-mail field.
           $this->form_validation->set_rules('password1', 'password', 'required');
@@ -203,10 +200,7 @@ class user_controller extends CI_Controller{
            if ($this->form_validation->run() == FALSE) {
                 $this->load->view('reg');
                   $this->load->view('footer');
-           }
-
-
-           else{
+           }else{
 
                $password =$this->testInput($this->input->post('password1'));
                $email =$this->testInput($this->input->post('email1'));
@@ -215,15 +209,13 @@ class user_controller extends CI_Controller{
 
                  if($this->session->loginflag==1){
                      $this->loginUser();
-                  }
-
-                 else{
+                  }else{
                      $this->load->view('reg');
                       $this->load->view('footer');
-                 }
+                  }
 
-           }
-         }
+             }
+          }
       }
 
 
@@ -248,16 +240,15 @@ class user_controller extends CI_Controller{
       */
 
     public function update(){
-	   if($this->session->loginflag==1)// if login flag set go to it
-	   {
+	   if($this->session->loginflag==1)  {// if login flag set go to it
+
            $email=$this->session->email;
 		   $res=$this->User_model->selectInfo($email);
 		   $data['res']=$res;
 		    $this->load->view('loginheader');
            $this->load->view('updatepage',$data);
                   $this->load->view('footer');
-		 }
-       else{
+		 }else{
         $this->load->view('reg');
          $this->load->view('footer');
        }//if login flag not set go to the registration and login page
@@ -291,15 +282,14 @@ class user_controller extends CI_Controller{
              echo $phone;// echo the old one
              echo "||";
              echo validation_errors();// echo the error using Ajax
-            }
-           else {
+            }else {
 
         $newephone=$this->input->post('changephone');
         $this->User_model->changePhone($id,$newephone);
         echo $newephone;
         echo " || ";
         echo"<span style='color:green'>updated successfuly</span>";
-	        }
+	         }
 
 	}
 
@@ -329,8 +319,7 @@ class user_controller extends CI_Controller{
            echo "||";
            echo validation_errors();
 
-          }
-         else {
+          }else {
 
         $newname=$this->input->post('name');
         $this->User_model->change($id,$newname);
@@ -368,8 +357,7 @@ class user_controller extends CI_Controller{
            echo "||";
            echo validation_errors();
 
-         }
-         else {
+         }else {
            $newemail=$this->input->post('changeemail');
            $this->User_model->changeEmail($id,$newemail);
            echo $newemail;
@@ -404,8 +392,7 @@ class user_controller extends CI_Controller{
 
            if ($this->form_validation->run() == FALSE) {
                echo validation_errors();
-            }
-       else {
+            }else {
 
         $config['upload_path'] ='./uploads/';
         $this->upload->initialize($config);
@@ -449,9 +436,7 @@ class user_controller extends CI_Controller{
            $this->form_validation->set_message('imgCheck', $this->upload->display_errors());
            return false;
 
-        }
-
-        else{
+        }else{
 
             $this->upload_data['file'] =  $this->upload->data();
             return true;
@@ -472,14 +457,18 @@ class user_controller extends CI_Controller{
         $this->load->view('loginheader');
          $this->load->view('updatepass');
           $this->load->view('footer');
-         }
-       else{  $this->load->view('reg');
+         }else{  $this->load->view('reg');
 
        $this->load->view('footer');
         }
        }
 
-       //to changepassword
+
+
+       /**
+        * to changepassword
+        * @author Enas Adwan
+         */
      public function changePassword(){
        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 	   $this->form_validation->set_rules('changepassword', 'changepassword', 'required|min_length[3]|max_length[15]');
@@ -495,8 +484,7 @@ class user_controller extends CI_Controller{
 
 
                      </div> ';
-		 }
-        else {
+		     }else {
              $currentpassword =$this->input->post('changepassword');
              $newpassword =$this->input->post('newpassword');
 	         $id=$this->session->id;
@@ -525,7 +513,7 @@ class user_controller extends CI_Controller{
 
                }
 
-	    }
+	       }
 
     }
 

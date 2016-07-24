@@ -47,8 +47,7 @@ class user_model extends CI_Model {
 
 			throw new dbconerr();
 
-         }}
-		catch (dbconerr $e){
+		}}	catch (dbconerr $e){
 
 				$err="something happen while connect to the server please try again later  ";
 
@@ -114,7 +113,7 @@ class user_model extends CI_Model {
      public function changeImage($id,$image){
 
         $sql=" UPDATE reg SET image=? where id=?";
-	    $query=$this->db->query($sql,array( $image,$id));
+	      $query=$this->db->query($sql,array( $image,$id));
 	    	return true ;
       }
 
@@ -129,29 +128,27 @@ class user_model extends CI_Model {
       public function updateActive($hash,$email){
 
          $sql = "SELECT name,image,active from reg where email=? && hash=?";
-		 $query=$this->db->query($sql, array( $email, $hash));
+		     $query=$this->db->query($sql, array( $email, $hash));
 
             if($query){
-			    $row = $query->row();
-			    if($row){
-	            $active=$row->active;
-		           if($active==0){
-		                $sql2=" UPDATE reg SET active=1 where email=?";
-			            $this->db->query($sql2, $email);
+			         $row = $query->row();
+			          if($row){
+	                $active=$row->active;
+		                 if($active==0){
+		                   $sql2=" UPDATE reg SET active=1 where email=?";
+			                 $this->db->query($sql2, $email);
                         $this->session->set_flashdata('verificationdone', 'succesus');
                         return true ;
-                     }
-			        else{
+                     }else{
 	                   return false;
-	                 }
+	                   }
 
-			      }
-			else{
+			          }	else{
 
-		   return false;
-	         }
-			 }else{
-		       return false;
+		                return false;
+	              }
+			     }else{
+		          return false;
 	          }
           }
 
@@ -166,19 +163,19 @@ class user_model extends CI_Model {
 							*/
        public function selectInfo($email){
            $sql = "SELECT name,image,phone,email from reg where id=? ";
-		   $id=$this->session->id;
+		       $id=$this->session->id;
            $query=$this->db->query($sql, $id);
            $row = $query->row();
-	       $res[]=	array(
+	         $res[]=	array(
                'name' => 	$row->name,
                 'email' => $row->email,
                 'image' =>$row->image,
-	            'phone' => $row->phone
+	              'phone' => $row->phone
                   );
 
               return $res;
 
-		}
+	    	}
 
 
 
@@ -190,7 +187,7 @@ class user_model extends CI_Model {
 			 */
 	   public function changepassword($id,$newpassword){
 	        $newpassword=password_hash($newpassword, PASSWORD_BCRYPT);
-		    $sql=" UPDATE reg SET password=? where id=?";
+		      $sql=" UPDATE reg SET password=? where id=?";
 	        $query=$this->db->query($sql,array( $newpassword,$id));
 	          return true ;
 	    }
@@ -213,37 +210,37 @@ class user_model extends CI_Model {
 
                 if(password_verify($password, $passworddatabase)){
                   $sql = "SELECT name,image,active,id from reg where email=? ";
-				  $query=$this->db->query($sql,  $email);
+				          $query=$this->db->query($sql,  $email);
 
-                      if($query){
+                   if($query){
 			             $row = $query->row();
 			                if($row){
 			                  $this->session->id=$row->id;
-				              $this->session->email=$email;
-				              $this->session->loginflag=1;
+				                $this->session->email=$email;
+				                $this->session->loginflag=1;
                                return 1;
-				             }else{
+				              }else{
 
-					          $this->session->notauthenticate=1;
-					          return 0;
-					        }
+					              $this->session->notauthenticate=1;
+					               return 0;
+					            }
 
-				      }else{
+				           }else{
+					            $this->session->notauthenticate=1;
+					            return 0;
+
+				           }
+
+	              }else{
+
+		              $this->session->wrongpassword=1;
+				        	return 0;
+				 	       }
+
+	          	}else{
 					    $this->session->notauthenticate=1;
 					    return 0;
 
-				       }
-
-	           }else{
-
-		           $this->session->wrongpassword=1;
-					return 0;
-					}
-
-	     	}else{
-					 $this->session->notauthenticate=1;
-					return 0;
-
-			}
+		       	}
 	     }
   }

@@ -1,7 +1,8 @@
 <?php
 
 
-$nameErr = $emailErr =$birthdayErr= $genderErr = $phoneErr= $passwordErr=$loginErr=$passwordconfirmErr=$imageErr=$zipErr=$stateErr=$cityErr="";
+
+$loginErr="";
 
 $msg=$name=$password=$passwordconfirm=$email=$gender=$birthday=$phone=$city=$state="";
 
@@ -405,49 +406,49 @@ title="Write Full Palestinian format 00972-xxx-xxx-xxxx" </div> -->
               );
 
 
-            echo form_open_multipart('User_controller/add_user',$info);
+            echo form_open_multipart('User_controller/addUser',$info);
             ?>
          *Name: <input type="text" class="form-control required name" title="write your full name" name="name" value="<?PHP print $name; ?>"id="name"  >
          <?php echo form_error('name'); ?>
 
-   <span id="n" name="n"class="error"><?php echo $nameErr;?></span>
+
         <br />
         *Email: <input type="email"  id="email"class="form-control required email" title="write a proper email you will need it for verfication" value="<?PHP print $email; ?>"  name="email"  >
           <?php echo form_error('email'); ?>
-<span id="e"class="error"><?php echo $emailErr;?></span> <br />
+<br>
    *Password: <input type="password" value="<?PHP print $password; ?>" name="password" id="password"class="form-control required password" title="write your password" id="usr" >
      <?php echo form_error('password'); ?>
-     <span id="p"class="error"><?php echo $passwordErr;?></span><br />
+<br>
        *Confirm password: <input type="password" name="passwordconfirm" id="passwordconfirm"value="<?PHP echo $passwordconfirm;?>" class="form-control required passwordconfirm"  title="Rewrite your password"   >
          <?php echo form_error('passwordconfirm'); ?>
-<span class="error"><?php echo $passwordconfirmErr;?></span> <br />
+ <br />
        *Phone: <input placeholder="00972-xxx-xxx-xxxx"type="tel" class="form-control required phone" value="<?PHP echo $phone;?>" name="phone" title="Write Full Palestinian format 00972-xxx-xxx-xxxx" id="phone" >
          <?php echo form_error('phone'); ?>
-      <span class="error"><?php echo $phoneErr;?></span>
+
        <br />       *Birthday:
        <input type="date" class="form-control required" id="birthday" name="birthday">
         <?php echo form_error('birthday'); ?>
-       <span class="error"><?php echo $birthdayErr;?></span>       <br />
+          <br />
               Profile Picture:
 <input type="file" class="form-control" id="usr" name="img">
 <?php echo form_error('img'); ?>
-<span class="error"> <?php echo $imageErr;?></span> <br />
+ <br />
 
      To fill the state and city automatically:
      <br />
       ZipCode: <input type="text" class="form-control zipcode "  name="zipcode" id="zipcode" title="write your country zipcode"  >
-      <span class="error" id="zipErr"><?php echo $zipErr;?></span>
+  </span>
       <br />
       <?php echo form_error('zipcode'); ?>
      OR write your city and state :
          <br />
          *City: <input type="text" class="form-control city required "  name="city" id="city"  value="<?PHP echo $city;?>"   >
            <?php echo form_error('city'); ?>
-           <span class="error" id="cityErr" > <?php echo $cityErr;?></span>
+
              <br />
  *State: <input type="text" name="state" id="state" class="form-control state required "  value="<?PHP echo $state;?>" >
    <?php echo form_error('state'); ?>
-   <span class="error"  id="stateErr"> <?php echo $stateErr;?>  </span>
+
       <br /><!-- *Gender: &nbsp; &nbsp;
   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female " checked="yes">Female &nbsp; &nbsp; <input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">Male-->
 

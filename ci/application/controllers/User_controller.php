@@ -463,6 +463,255 @@ class user_controller extends CI_Controller{
        $this->load->view('footer');
         }
        }
+       public function authorPanel(){
+          if($this->session->loginflag==1){
+          // $this->load->view('loginheader');
+           $this->load->view('authorpanel');
+
+            // $this->load->view('footer');
+            }else{  $this->load->view('reg');
+
+          $this->load->view('footer');
+           }
+          }
+
+          public function addArticle(){
+             if($this->session->loginflag==1){
+             // $this->load->view('loginheader');
+              $this->load->view('addarticle');
+
+               // $this->load->view('footer');
+               }else{  $this->load->view('reg');
+
+             $this->load->view('footer');
+              }
+             }
+             public function addArticleLogic(){
+                if($this->session->loginflag==1){
+                // $this->load->view('loginheader');
+                       $id=$this->session->id;
+                       $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+                	   $this->form_validation->set_rules('title', 'title', 'required');
+                     $this->form_validation->set_rules('content', 'content', 'required');
+                     $this->form_validation->set_rules('img', 'Img', 'callback_imgCheck');
+
+                         if ($this->form_validation->run() == FALSE) {
+
+                          $this->load->view('addarticle');
+
+                         }else {
+                           $config['upload_path'] ='./uploads/';
+                           $this->upload->initialize($config);
+                           $this->load->library('upload', $config);
+                           $data_upload_files = $this->upload->data();
+                           $image = $data_upload_files['full_path'];
+                           $image=$image.$_FILES['img']['name'];
+
+                           $this->User_model->changeImage($id,$image);
+
+
+
+  $this->load->view('addarticle');
+  $id=$this->session->id;
+   $slug = url_title($this->input->post('title'), 'dash', TRUE);
+ $data=array(
+   'title '=>testInput($this->input->post('title')),
+   'body'=>testInput($this->input->post('content')),
+    'id'=>$id,
+      'slug' => $slug,
+
+    );
+
+$title=testInput($this->input->post('title'));
+$data = $this->security->xss_clean($data);
+//insert the data
+$user_model_bool  =$this->User_model->addArticle($data);
+$this->User_model->getID_article($title);
+	$id_article=$this->session->id_article;
+  $data=array(
+    'id_article '=>	$id_article,
+    'image'=>$image,
+
+
+     );
+$this->User_model->insertImage($data);
+$this->load->view('addarticle');
+
+                        //    $this->session->i= $i;
+            /*  for ($k = 0; $k < count($_FILES['img']['name']); $k++) {
+                $config['upload_path'] ='./uploads/';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size'] = 1000;
+                $this->upload->initialize($config);
+                $this->load->library('upload', $config);
+                //$image[$k]=$_FILES['img']['name'][$k];
+                $image[$k]=$_FILES['img']['name'][$k];
+                $data_upload_files = $this->upload->data($image[$k]);
+                $data_upload_files= array('img' => $this->upload->data());
+
+
+                $image[$k] = $data_upload_files['full_path'];}
+
+                        /*   $config['upload_path'] ='./uploads/';
+                           $this->upload->initialize($config);
+                           $this->load->library('upload', $config);
+
+                           $data_upload_files = $this->upload->do_upload('img');
+                         $image[ $k] = $data_upload_files['full_path'];
+                        $image[$k]=$image[$k].$_FILES['img']['name'];
+                            $data_upload_files = $this->upload->do_upload( $image[$k]);
+                       $k++;
+
+                     }*/
+/*
+                     $this->load->library('upload');
+
+    $files = $_FILES;
+    $cpt = count($_FILES['img']['name']);
+    for($i=0; $i<$cpt; $i++)
+     foreach($files as $key=>$value)
+    {
+      if($i==0){
+       $this->session->m0=$value['name'][0];}
+       if($i==1){
+        $this->session->m1=$value['name'][1];}
+        $_FILES['img']['name']= $value['name'][$i];
+        $_FILES['img']['type']= $value['type'][$i];
+        $_FILES['img']['tmp_name']= $value['tmp_name'][$i];
+      //  $_FILES['img']['error']= $files['img']['error'][$i];
+        //$_FILES['img']['size']= $files['img']['size'][$i];
+
+        $this->upload->initialize($this->set_upload_options());
+        $data_upload_files = $this->upload->data($_FILES['img']['name']);
+        $image = $data_upload_files['full_path'];
+      //  $this->upload->do_upload($_FILES['img']['name']);
+        $this->session->m= $i;
+          $this->load->view('addarticle');
+
+
+}*/
+}
+}
+}
+              //  $this->session->m0=$image[0];
+            //   $this->session->m1=$image[1];
+
+                  //  $this->session->m= $k;
+
+
+public function home(){
+  $this->load->view('loginheader');
+
+$data['articles']=$this->User_model->selectArticle();
+
+$this->load->view('articles',$data);
+   $this->load->view('footer');
+}
+
+public function set_upload_options()
+{
+    //upload an image options
+    $config = array();
+    $config['upload_path'] = './uploads/';
+    $config['allowed_types'] = 'gif|jpg|png';
+
+
+    //$config['overwrite']     = FALSE;
+
+    return $config;
+}
+public function view($slug = NULL)
+{
+$data['news_item'] = $this->User_model->selectArticle($slug);
+
+if (empty($data['news_item']))
+{
+        show_404();
+}
+
+$data['title'] = $data['news_item']['title'];
+
+$this->load->view('loginheader', $data);
+$this->load->view('view', $data);
+$this->load->view('footer');
+}
+
+
+/*public function imgChecks(){
+    for ($k = 0; $k < count($_FILES['img']['name']); $k++) {
+  $config['upload_path'] ='./uploads/';
+  $config['allowed_types'] = 'gif|jpg|png|jpeg';
+  $config['max_size'] = 1000;
+  $this->upload->initialize($config);
+  $this->load->library('upload', $config);
+  $data_upload_files = $this->upload->data('img',$k);
+  $image = $data_upload_files['full_path'];
+    if (!$this->upload->do_upload('img')) {
+       $this->form_validation->set_message('imgCheck', $this->upload->display_errors());
+       return false;
+
+    }else{
+
+        $this->upload_data['file'] =  $this->upload->data();
+        return true;
+
+    }}
+    $this->session->m0=$image[0];
+   $this->session->m1=$image[1];
+
+     $this->session->m= $k;
+
+  }*/
+
+//$images = array();
+
+   /*foreach ( $_FILES['img'] as $key => $image) {
+       $_FILES['img']['name']=  $_FILES['name'][$key];
+       //$_FILES['img']['type']=  $_FILES'type'][$key];
+       $_FILES['img']['tmp_name']=  $_FILES['tmp_name'][$key];
+
+
+       $fileName = $title .'_'. $image;
+
+       $img[] = $fileName;
+
+       $config['file_name'] = $fileName;
+       $config['upload_path'] ='./uploads/';
+       $this->upload->initialize($config);
+
+
+
+       if ($this->upload->do_upload('img')) {
+           $this->upload->data();
+       }}*
+                            $id=$this->session->id;
+                           $data=array(
+                             'title '=>testInput($this->input->post('title')),
+                             'body'=>testInput($this->input->post('content')),
+                              'id'=>$id,
+
+                              );
+
+
+                          $data = $this->security->xss_clean($data);
+                    //insert the data
+                    $user_model_bool  =$this->User_model->addArticle($data);
+                    $this->load->view('addarticle');
+
+                            if( !$user_model_bool){
+                             $this->load->view('reg');
+                            }
+
+
+
+                  // $this->load->view('footer');
+                 }
+                  }else{  $this->load->view('reg');
+
+                $this->load->view('footer');
+                 }
+                }
+
 
 
 

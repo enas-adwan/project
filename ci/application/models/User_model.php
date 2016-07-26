@@ -58,6 +58,29 @@ class user_model extends CI_Model {
 		}
 	}
 }
+public function addArticle($data){
+
+  $insert=$this->db->insert('articles',$data);
+if($insert){
+		return true ;
+	}
+{
+	try{
+			 if(!$insert){
+
+		throw new dbconerr();
+
+	}}	catch (dbconerr $e){
+
+			$err="something happen while connect to the server please try again later  ";
+
+			$e->processError($err);
+
+
+	}
+}
+}
+
 
 
 
@@ -229,7 +252,40 @@ class user_model extends CI_Model {
               return $res;
 
 	    	}
+				public function selectArticle($slug = FALSE){
 
+        if ($slug === FALSE)
+        {
+
+						$this->db->select('title, body, id,slug');
+
+					$query = $this->db->get('articles');
+
+									return $query->result_array();
+        }
+
+        $query = $this->db->get_where('articles', array('slug' => $slug));
+        return $query->row_array();
+
+
+
+
+
+
+
+//$query = $this->db->get_where('articles', array('slug' => $slug));
+//return $query->row_array();
+
+
+				 }
+
+
+				public function insertImage($data){
+					  $insert=$this->db->insert('imagees',$data);
+
+
+
+ 	    	}
 
 
 		 /**
@@ -241,6 +297,7 @@ class user_model extends CI_Model {
 	   public function changepassword($id,$newpassword){
 	        $newpassword=password_hash($newpassword, PASSWORD_BCRYPT);
 		      $sql=" UPDATE reg SET password=? where id=?";
+
 	        $query=$this->db->query($sql,array( $newpassword,$id));
 
 						try{
@@ -257,6 +314,31 @@ class user_model extends CI_Model {
 
 						}
 	    }
+
+			public function getID_article($title){
+				$sql = "SELECT id_article from articles where title = ?";
+
+				$query=$this->db->query($sql, $title);
+				$row = $query->row();
+					$this->session->id_article= $row->id_article;
+
+
+
+	 					try{
+	 								if(!$query){
+
+	 									throw new dbconerr();
+	 									return true ;
+	 					}}	catch (dbconerr $e){
+
+	 							 $err="something happen while connect to the server please try again later  ";
+
+	 							 $e->processError($err);
+
+
+	 					}
+	 		}
+
 
 
 

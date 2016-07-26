@@ -1,8 +1,8 @@
 ul {
     list-style-type: none;
-   
 
-  
+
+
     overflow: hidden;
     border: 1px solid #e7e7e7;
 	background-color: gray;
@@ -13,7 +13,7 @@ li {
 }
 li:last-child {
    float: right;
- 
+
 }
 li a {
     display: block;
@@ -38,68 +38,68 @@ li a:hover {
 
 }
 #usr{
-	
+
 	width: 60%;
 }
 
 #name{
-	
+
 	width: 60%;
 }
 #password{
-	
+
 	width: 60%;
 }
 
 
 #email{
-	
+
 	width: 60%;
 }
 
 #passwordconfirm{
-	
+
 	width: 60%;
 }
 
 #phone{
-	
+
 	width: 60%;
 }
 
 #changephone{
-	
+
 	width: 60%;
 }
 
 #txtZipCode{
-	
+
 	width: 60%;
 }
 #changeemail{
-	
+
 	width: 60%;
 }
 
 #changepassword{
-	
+
 	width: 60%;
 }
 #newpassword{
-	
+
 	width: 60%;
 }
 #confirmnewpassword{
-	
+
 	width: 60%;
 }
 
 #changename{
-	
+
 	width: 60%;
 }
 #birthday{
-	
+
 	width: 60%;
 }
 #rad{
@@ -111,33 +111,33 @@ li a:hover {
 
 #col3{
 	margin-top: 140px;
-	
+
 }
 #email1{
-	
+
 	width: 60%;
 }
 
 #password1{
-	
+
 	width: 60%;
 }
 #city{
-	
+
 	width: 60%;
 }
 
 #state{
-	
+
 	width: 60%;
 }
 #zipcode{
-	
+
 	width: 60%;
 }
 
 
 .zipcode{
-	
+
 	width: 60%;
 }

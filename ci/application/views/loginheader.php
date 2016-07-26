@@ -33,10 +33,11 @@
 
 <ul>
 
-<li> <a href="#home.php">Home</a> </li>
+<li> <a href="<?php echo base_url('User_controller/home')?>">Home</a> </li>
 <li> <a href="<?php echo base_url('User_controller/auth')?>">profile</a></li>
 <li> <a href="<?php echo base_url('User_controller/update')?>">update</a></li>
 <li> <a href="<?php echo base_url('User_controller/updatepass')?>">updatepassword</a></li>
+<li> <a href="<?php echo base_url('User_controller/authorPanel')?>">Author Panel</a></li>
 <!--<li> <a href="update.php?se=<?php echo    $_SESSION["update"]  ?> ">Update</a></li> -->
 <li><a href="contact.php">contact us</a></li>
 <li> <a href="<?php echo base_url('User_controller/loc')?>">Logout</a></li>

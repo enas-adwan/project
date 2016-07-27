@@ -87,7 +87,38 @@ if($insert){
 	}
 }
 }
+public function updateArticleElement($data){
 
+
+			$id=$res['id'];
+			$title=$res['title'];
+			$body=$res['body'];
+
+
+$id=$data['id'];
+$title=$data['title'];
+$body=$data['body'];
+//  $insert=$this->db->insert('articles',$data);
+if($insert){
+		return true ;
+	}
+{
+	try{
+			 if(!$insert){
+
+		throw new dbconerr();
+
+	}}	catch (dbconerr $e){
+
+			$err="something happen while connect to the server please try again later  ";
+
+			$e->processError($err);
+
+
+	}
+}
+
+}
 
 
 

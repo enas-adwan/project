@@ -507,7 +507,7 @@ class user_controller extends CI_Controller{
                            $image = $data_upload_files['full_path'];
                            $image=$image.$_FILES['img']['name'];
 
-                           $this->User_model->changeImage($id,$image);
+                          // $this->User_model->changeImage($id,$image);
 
 
 
@@ -679,6 +679,69 @@ $this->load->view('editarticle',$data);
 //redirect('User_controller/editArticles','refresh');
 
 }
+
+public function updateArticleelement(){
+
+  if($this->session->loginflag==1){
+  // $this->load->view('loginheader');
+         $id=$this->session->id;
+         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+       $this->form_validation->set_rules('title', 'title', 'required');
+       $this->form_validation->set_rules('content', 'content', 'required');
+      // $this->form_validation->set_rules('img', 'Img', 'callback_imgCheck');
+
+           if ($this->form_validation->run() == FALSE) {
+
+            $this->load->view('addarticle');
+
+           }else {
+             $config['upload_path'] ='./uploads/';
+             $this->upload->initialize($config);
+             $this->load->library('upload', $config);
+             $data_upload_files = $this->upload->data();
+             $image = $data_upload_files['full_path'];
+             $image=$image.$_FILES['img']['name'];
+
+            // $this->User_model->changeImage($id,$image);
+
+
+
+//$this->load->view('addarticle');
+$id=$this->session->updateid;
+$slug = url_title($this->input->post('title'), 'dash', TRUE);
+$data['res']=array(
+'title '=>testInput($this->input->post('title')),
+'body'=>testInput($this->input->post('content')),
+'id'=>$id,
+'slug' => $slug,
+
+
+);
+
+$title=testInput($this->input->post('title'));
+$data = $this->security->xss_clean($data);
+//insert the data
+$user_model_bool  =$this->User_model->updateArticleElement($data);
+
+$this->User_model->getID_article($title);
+$id_article=$this->session->id_article;
+$data=array(
+'id_article '=>	$id_article,
+'image'=>$image,
+
+
+);
+
+$this->User_model->updateArticleImage($data);
+$this->session->updated=1;
+$data['articles']=$this->User_model->selectArticle();
+
+$this->load->view('updatearticles',$data);
+
+//$this->session->deleted=1;
+//redirect('User_controller/editArticles','refresh');
+
+}}}
 
 public function set_upload_options()
 {

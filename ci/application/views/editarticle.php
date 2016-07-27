@@ -1,5 +1,8 @@
 
+<?php
+$this->session->updateid=$news_item['id_article'] ;
 
+?>
 
 <html>
 
@@ -11,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+
 
 
     <html>
@@ -127,14 +130,14 @@ $this->session->unset_userdata('added');
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                      <h1 class="page-header">Add new Article</h1>
+                      <h1 class="page-header">Update your Article</h1>
                       <?php
                     //  $info=array('id'=>'reg',
                                 //  'name'=>'reg'
                                 //  );
 
 
-                                echo form_open_multipart('User_controller/addArticleLogic');
+                                echo form_open_multipart('User_controller/updateArticleelement');
                                 ?>
 
                  <div class="form-group">

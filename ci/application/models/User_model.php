@@ -263,11 +263,12 @@ if($insert){
 
         if ($slug === FALSE)
         {
+$id=$this->session->id;
 					$this->db->select('*');
 					$this->db->from('articles');
 					$this->db->join('reg', 'reg.id = articles.id');
 					$this->db->join('imagees', 'imagees.id_article = articles.id_article');
-				//	$this->db->where('articles.user_id', $user_id);
+				$this->db->where('reg.id', $id);
 						//$this->db->select('title, body,id_article ,id,slug');
 
 				//	$query = $this->db->get('articles');
@@ -296,6 +297,43 @@ $query = $this->db->get();
 
 
 				 }
+				 public function selectArticleall($slug = FALSE){
+
+					if ($slug === FALSE)
+					{
+					 $this->db->select('*');
+					 $this->db->from('articles');
+					 $this->db->join('reg', 'reg.id = articles.id');
+					 $this->db->join('imagees', 'imagees.id_article = articles.id_article');
+				 //	$this->db->where('articles.user_id', $user_id);
+						 //$this->db->select('title, body,id_article ,id,slug');
+
+				 //	$query = $this->db->get('articles');
+
+	$query = $this->db->get();
+									 return $query->result_array();
+					}
+				 $this->db->select('*');
+				 $this->db->from('articles');
+
+					 $this->db->join('imagees', 'imagees.id_article = articles.id_article');
+				 $this->db->where('articles.slug', $slug);
+				 $query = $this->db->get();
+
+				//  $query = $this->db->get_where('articles', array('slug' => $slug));
+					return $query->row_array();
+
+
+
+
+
+
+
+	//$query = $this->db->get_where('articles', array('slug' => $slug));
+	//return $query->row_array();
+
+
+					}
 
 				 public function deleteArticle($id){
 					 $this->db->query('DELETE   FROM imagees

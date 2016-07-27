@@ -536,6 +536,7 @@ $this->User_model->getID_article($title);
 
      );
 $this->User_model->insertImage($data);
+$this->session->added=1;
 $this->load->view('addarticle');
 
                         //    $this->session->i= $i;
@@ -603,14 +604,25 @@ $this->load->view('addarticle');
 public function home(){
   $this->load->view('loginheader');
 
-$data['articles']=$this->User_model->selectArticle();
+$data['articles']=$this->User_model->selectArticleall();
 
 $this->load->view('articles',$data);
    $this->load->view('footer');
 }
+
+public function homeforall(){
+  //$this->load->view('loginheader');
+
+$data['articles']=$this->User_model->selectArticleall();
+
+$this->load->view('allarticle',$data);
+   $this->load->view('footer');
+}
+
+
 public function view($slug = NULL)
 {
-$data['news_item'] = $this->User_model->selectArticle($slug);
+$data['news_item'] = $this->User_model->selectArticleall($slug);
 
 if (empty($data['news_item']))
 {
@@ -623,6 +635,14 @@ $this->load->view('loginheader', $data);
 $this->load->view('view', $data);
 $this->load->view('footer');
 }
+public function userarticle(){
+  $this->load->view('loginheader');
+
+$data['articles']=$this->User_model->selectArticle();
+
+$this->load->view('articles',$data);
+   $this->load->view('footer');
+}
 
 
 public function editArticles(){
@@ -633,6 +653,15 @@ $data['articles']=$this->User_model->selectArticle();
 $this->load->view('editarticles',$data);
 
 }
+public function authorViewArticle(){
+
+
+$data['articles']=$this->User_model->selectArticle();
+
+$this->load->view('updatearticles',$data);
+
+}
+
 
 public function deleteArticle($id){
 
@@ -652,6 +681,7 @@ public function set_upload_options()
 
     return $config;
 }
+
 
 
 /*public function imgChecks(){

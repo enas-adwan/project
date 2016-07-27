@@ -365,8 +365,8 @@ $( "#log" ).validate({
 
 
 <ul>
-<li> <a href="home.php">Home</a> </li>
-<li> <a href="regandlog.php">Registration and Login</a></li>
+  <li > <a style="color: white;" href="<?php echo base_url('User_controller/homeforall')?>">Home</a> </li>
+<li > <a style="color: white;" href="<?php echo base_url('User_controller')?>">Registration and login</a> </li>
 <li>  <a href="contact.php">Contact us</a></li>
 </ul>
 </nav>

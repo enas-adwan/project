@@ -608,6 +608,21 @@ $this->load->view('articles',$data);
    $this->load->view('footer');
 }
 
+public function editArticles(){
+
+
+$data['articles']=$this->User_model->selectArticle();
+
+$this->load->view('editarticles',$data);
+
+}
+
+public function deleteArticle($id){
+
+$this->User_model->deleteArticle($id);
+
+}
+
 public function set_upload_options()
 {
     //upload an image options

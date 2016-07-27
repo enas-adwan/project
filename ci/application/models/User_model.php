@@ -258,6 +258,7 @@ if($insert){
         {
 					$this->db->select('*');
 					$this->db->from('articles');
+					$this->db->join('reg', 'reg.id = articles.id');
 					$this->db->join('imagees', 'imagees.id_article = articles.id_article');
 				//	$this->db->where('articles.user_id', $user_id);
 						//$this->db->select('title, body,id_article ,id,slug');
@@ -269,7 +270,8 @@ $query = $this->db->get();
         }
 				$this->db->select('*');
 				$this->db->from('articles');
-				$this->db->join('imagees', 'imagees.id_article = articles.id_article');
+
+					$this->db->join('reg', 'imagees.id_article = articles.id_article');
 				$this->db->where('articles.slug', $slug);
 				$query = $this->db->get();
 
@@ -288,13 +290,52 @@ $query = $this->db->get();
 
 				 }
 
+				 public function deleteArticle($id){
+					 $this->db->query('DELETE   FROM imagees
+WHERE imagees.id_article= '.$id.'');
+$this->db->query('DELETE   FROM articles
+WHERE articles.id_article= '.$id.'');
+}
+					/* $this->db->select('*');
+ $this->db->from('articles');
+$this->db->join('imagees', 'imagees.id_article = articles.id_article');
+ $this->db->where( 'imagees.id_article = articles.id_article');
+ $this->db->delete('articles', 'imagees ');
+ return true;
 
-				public function insertImage($data){
-					  $insert=$this->db->insert('imagees',$data);
+//$this->db->where('articles.id_article', $id);
+	// $this->db->join('imagees', 'imagees.id_article = articles.id_article');
+	//->db->delete('articles', array('id_article' => $id));
+//$this->db->delete('imagees', array('id_article' => $id));
+			//		 $this->db->delete('articles');
+				//	 $this->db->where( 'imagees.id_article = articles.id_article');
+				//	  $this->db->delete('imagees');
+					 //$this->db->from('articles');
+				//	 $this->db->join('imagees', 'imagees.id_article = articles.id_article');
+
+				// $this->db->where('articles.id_article', $id);
+						 //$this->db->select('title, body,id_article ,id,slug');
+
+				 //	$query = $this->db->get('articles');
+
+	            //  $query = $this->db->get();
+
+					}
 
 
 
- 	    	}
+
+
+
+
+	//$query = $this->db->get_where('articles', array('slug' => $slug));
+	//return $query->row_array();
+
+
+
+
+
+
 
 
 		 /**

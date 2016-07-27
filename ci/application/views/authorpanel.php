@@ -49,7 +49,7 @@
 
       <ul class="nav navbar-nav">
 
-        <li > <a style="color: white;" href="#home.php" >Home</a> </li>
+        <li > <a style="color: white;" href="<?php echo base_url('User_controller/home')?>" >Home</a> </li>
         <li> <a style="color: white;" href="<?php echo base_url('User_controller/auth')?>">profile</a></li>
         <li> <a style="color: white;" href="<?php echo base_url('User_controller/update')?>">update</a></li>
         <li> <a style="color: white;" href="<?php echo base_url('User_controller/updatepass')?>">updatepassword</a></li>
@@ -77,7 +77,7 @@
                     <a href="<?php echo base_url('User_controller/addArticle')?>">Add Article</a>
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a>
+                    <a href="<?php echo base_url('User_controller/editArticles')?>">Edit Articles</a>
                 </li>
                 <li>
                     <a href="#">Overview</a>

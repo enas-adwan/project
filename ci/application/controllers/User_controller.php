@@ -518,7 +518,7 @@ class user_controller extends CI_Controller{
    'title '=>testInput($this->input->post('title')),
    'body'=>testInput($this->input->post('content')),
     'id'=>$id,
-      'slug' => $slug,
+
 
     );
 
@@ -619,21 +619,6 @@ public function set_upload_options()
     //$config['overwrite']     = FALSE;
 
     return $config;
-}
-public function view($slug = NULL)
-{
-$data['news_item'] = $this->User_model->selectArticle($slug);
-
-if (empty($data['news_item']))
-{
-        show_404();
-}
-
-$data['title'] = $data['news_item']['title'];
-
-$this->load->view('loginheader', $data);
-$this->load->view('view', $data);
-$this->load->view('footer');
 }
 
 

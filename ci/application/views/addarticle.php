@@ -1,15 +1,15 @@
 
 <?php
 
-if( $this->session->i){
+if( $this->session->flashdata('i')){
 
      $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
 
      print '<br /><br /><br /><br /> <div id="h"  class="alert alert-success">
      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-     <strong>Success!</strong>  ' . $this->session->i . '
+     <strong>Success!</strong>  ' . $msg . '
      </div> ';
-     	$this->session->unset_userdata('m');
+
 
 }
 ?>
@@ -69,7 +69,7 @@ if( $this->session->i){
 
       <ul class="nav navbar-nav">
 
-        <li > <a style="color: white;" href="<?php echo base_url('User_controller/home')?>" >Home</a> </li>
+        <li > <a style="color: white;" href="#home.php" >Home</a> </li>
         <li> <a style="color: white;" href="<?php echo base_url('User_controller/auth')?>">profile</a></li>
         <li> <a style="color: white;" href="<?php echo base_url('User_controller/update')?>">update</a></li>
         <li> <a style="color: white;" href="<?php echo base_url('User_controller/updatepass')?>">updatepassword</a></li>

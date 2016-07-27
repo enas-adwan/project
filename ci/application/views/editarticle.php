@@ -1,7 +1,6 @@
 
 
 
-
 <html>
 
 <head>
@@ -140,13 +139,13 @@ $this->session->unset_userdata('added');
 
                  <div class="form-group">
                    <label for="title">Title</label>
-                   <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                   <input type="text" class="form-control" id="title" name="title" value="<?php echo $news_item['title'] ;?>">
                      <?php echo form_error('title'); ?>
                  </div>
                  <div class="row">
                    <div class="col-xs-12 col-sm-7 col-md-9">
                      <div class="form-group">
-                       <textarea name="content" id="content" style="width:100% ; height:500px ;"></textarea>
+                       <textarea name="content" id="content" style="width:100% ; height:500px ;" ><?php echo $news_item['body'] ;?></textarea>
                        <script>CKEDITOR.replace('content');</script>
                          <?php echo form_error('content'); ?>
                      </div>
@@ -154,12 +153,12 @@ $this->session->unset_userdata('added');
                    <div class="col-xs-5 col-md-3">
                      <div class="form-group">
 
-                       <button type="submit" class="btn btn-primary">Publish</button>
+                       <button type="submit" class="btn btn-primary" >Publish</button>
                      </div>
 
                      <div class="form-group">
                        <label for="image">Image</label>
-                       <input type="file" id="image" class="form-control"  name="img" />
+                       <input type="file" id="image" class="form-control"  name="img" value="<?php echo $news_item['image'] ;?>"/>
                          <?php echo form_error('img'); ?>
                        <p class="help-block">Image definitions</p>
                      </div>

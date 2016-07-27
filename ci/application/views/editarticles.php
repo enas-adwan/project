@@ -63,7 +63,22 @@
           </ul>
         </div>
       </nav>
+      <div>
+        <?php
 
+        if( $this->session->deleted){
+
+            // $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
+
+             print ' <div id="h"  class="alert alert-success">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Success!</strong>  the article has been deleted
+             </div> ';
+$this->session->unset_userdata('deleted');
+
+        }
+        ?>
+      </div>
         <div id="wrapper">
 
             <!-- Sidebar -->
@@ -81,7 +96,7 @@
                         <a href="<?php echo base_url('User_controller/editArticles')?>">Delete Articles</a>
                     </li>
                     <li>
-                        <a href="<?php echo base_url('User_controller/authorViewArticle')?>">View your Articles</a>
+                        <a href="<?php echo base_url('User_controller/authorViewArticle')?>">Edit your Articles</a>
                     </li>
                     <li>
                         <a href="#">Events</a>

@@ -334,6 +334,19 @@ $query = $this->db->get();
 
 
 					}
+					public function updateArticle($id){
+						$this->db->select('*');
+						$this->db->from('articles');
+
+							$this->db->join('imagees', 'imagees.id_article = articles.id_article');
+						$this->db->where('articles.id_article', $id);
+						$query = $this->db->get();
+
+					//  $query = $this->db->get_where('articles', array('slug' => $slug));
+						return $query->row_array();
+
+ }
+
 
 				 public function deleteArticle($id){
 					 $this->db->query('DELETE   FROM imagees

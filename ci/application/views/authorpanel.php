@@ -80,7 +80,7 @@
                     <a href="<?php echo base_url('User_controller/editArticles')?>">Delete Articles</a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url('User_controller/authorViewArticle')?>">View your Articles</a>
+                    <a href="<?php echo base_url('User_controller/authorViewArticle')?>">Edit your Articles</a>
                 </li>
                 <li>
                     <a href="#">Events</a>

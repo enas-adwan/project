@@ -666,6 +666,17 @@ $this->load->view('updatearticles',$data);
 public function deleteArticle($id){
 
 $this->User_model->deleteArticle($id);
+$this->session->deleted=1;
+redirect('User_controller/editArticles','refresh');
+
+}
+public function updateArticle($id){
+
+$data['news_item']=$this->User_model->updateArticle($id);
+$this->load->view('editarticle',$data);
+   $this->load->view('footer');
+//$this->session->deleted=1;
+//redirect('User_controller/editArticles','refresh');
 
 }
 

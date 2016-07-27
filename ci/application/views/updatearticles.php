@@ -115,7 +115,7 @@
                                             <?php echo $news_item['body']; ?>
 
                                     </div>
-                                        <p><a href="<?php echo site_url('user_controller/deleteArticle/'.$news_item['id_article']); ?>">delete article</a></p>
+                                        <p><a href="<?php echo site_url('user_controller/updateArticle/'.$news_item['id_article']); ?>">Edit article</a></p>
 
                                 <?php endforeach; ?>
                         </div>

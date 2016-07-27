@@ -271,7 +271,7 @@ $query = $this->db->get();
 				$this->db->select('*');
 				$this->db->from('articles');
 
-					$this->db->join('reg', 'imagees.id_article = articles.id_article');
+					$this->db->join('imagees', 'imagees.id_article = articles.id_article');
 				$this->db->where('articles.slug', $slug);
 				$query = $this->db->get();
 

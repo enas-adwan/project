@@ -607,6 +607,22 @@ $data['articles']=$this->User_model->selectArticle();
 $this->load->view('articles',$data);
    $this->load->view('footer');
 }
+public function view($slug = NULL)
+{
+$data['news_item'] = $this->User_model->selectArticle($slug);
+
+if (empty($data['news_item']))
+{
+        show_404();
+}
+
+$data['title'] = $data['news_item']['title'];
+
+$this->load->view('loginheader', $data);
+$this->load->view('view', $data);
+$this->load->view('footer');
+}
+
 
 public function editArticles(){
 

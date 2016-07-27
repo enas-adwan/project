@@ -518,6 +518,7 @@ class user_controller extends CI_Controller{
    'title '=>testInput($this->input->post('title')),
    'body'=>testInput($this->input->post('content')),
     'id'=>$id,
+     'slug' => $slug,
 
 
     );

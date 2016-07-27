@@ -58,6 +58,13 @@ class user_model extends CI_Model {
 		}
 	}
 }
+public function insertImage($data){
+				$insert=$this->db->insert('imagees',$data);
+
+
+
+		}
+
 public function addArticle($data){
 
   $insert=$this->db->insert('articles',$data);

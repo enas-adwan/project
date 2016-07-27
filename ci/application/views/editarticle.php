@@ -1,6 +1,7 @@
 
 <?php
 $this->session->updateid=$news_item['id_article'] ;
+$image=$news_item['image'];
 
 ?>
 
@@ -74,15 +75,15 @@ $this->session->updateid=$news_item['id_article'] ;
   <div>
     <?php
 
-    if( $this->session->added){
+    if( $this->session->updated){
 
          $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
 
          print ' <div id="h"  class="alert alert-success">
          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-         <strong>Success!</strong>  ' . $msg . '
+         <strong>Success!</strong>  the article has been updated
          </div> ';
-$this->session->unset_userdata('added');
+$this->session->unset_userdata('updated');
 
     }
     ?>
@@ -137,12 +138,13 @@ $this->session->unset_userdata('added');
                                 //  );
 
 
-                                echo form_open_multipart('User_controller/updateArticleelement');
+                              //  echo form_open_multipart('User_controller/updateArticleelement/$news_item['id_article'] ');
+                          echo form_open_multipart(site_url('user_controller/updateArticleelement/'.$news_item['id_article']));
                                 ?>
 
                  <div class="form-group">
                    <label for="title">Title</label>
-                   <input type="text" class="form-control" id="title" name="title" value="<?php echo $news_item['title'] ;?>">
+                   <input type="text"  id="title" name="title" value="<?php echo $news_item['title'] ;?>" class="form-control">
                      <?php echo form_error('title'); ?>
                  </div>
                  <div class="row">
@@ -166,11 +168,12 @@ $this->session->unset_userdata('added');
                        <p class="help-block">Image definitions</p>
                      </div>
                      <a href="#" class="thumbnail">
-                       <img src="http://fakeimg.pl/300/">
+
+                       <img    src="<?php echo base_url($image); ?>">
                      </a>
-                     <a href="#" class="thumbnail">
+                  <!--   <a href="#" class="thumbnail">
                        <img src="http://fakeimg.pl/300/">
-                     </a>
+                     </a>-->
                    </div>
                  </div>
 

@@ -74,11 +74,11 @@
 
     if( $this->session->added){
 
-         $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
+        // $msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
 
          print ' <div id="h"  class="alert alert-success">
          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-         <strong>Success!</strong>  ' . $msg . '
+         <strong>Success!</strong>  the article has been added successfuly
          </div> ';
 $this->session->unset_userdata('added');
 

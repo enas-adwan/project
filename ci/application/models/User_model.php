@@ -87,19 +87,26 @@ if($insert){
 	}
 }
 }
-public function updateArticleElement($data){
+public function updateArticleElement($res){
+
+	foreach ($res as $reso => $list) {
+		foreach ($res as $reso => $listt) {
+
+			$id=$listt['id'];
+			//$title=$listt['title'];
+			$body=$listt['body'];
+			$slug=$listt['slug'];
+			$title=$listt['title'];
+
+			$sql=" UPDATE articles SET title=?,body=?,slug=? WHERE id_article=?";
+			$query=$this->db->query($sql,array( $title,$body,$slug,$id));
+
+		 }
+	 }
 
 
-			$id=$res['id'];
-			$title=$res['title'];
-			$body=$res['body'];
-
-
-$id=$data['id'];
-$title=$data['title'];
-$body=$data['body'];
 //  $insert=$this->db->insert('articles',$data);
-if($insert){
+/*if($insert){
 		return true ;
 	}
 {
@@ -116,11 +123,23 @@ if($insert){
 
 
 	}
-}
+}*/
 
 }
+public function updateArticleImage($ress){
 
+	foreach ($ress as $reso => $list) {
+		foreach ($ress as $reso => $listt) {
 
+			$id=$listt['id_article'];
+			//$title=$listt['title'];
+			$img=$listt['image'];
+
+		  $sql=" UPDATE imagees SET image=? where id_article=?";
+			$query=$this->db->query($sql,array( $img,$id));
+
+}}
+}
 
 			/**
 			 * to change name

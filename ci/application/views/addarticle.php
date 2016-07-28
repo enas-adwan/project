@@ -159,7 +159,7 @@ $this->session->unset_userdata('added');
 
                      <div class="form-group">
                        <label for="image">Image</label>
-                       <input type="file" id="image" class="form-control"  name="img" />
+                       <input type="file"  name="img[]" multiple />
                          <?php echo form_error('img'); ?>
                        <p class="help-block">Image definitions</p>
                      </div>

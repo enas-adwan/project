@@ -347,6 +347,25 @@ $query = $this->db->get();
 
 
 				 }
+        public function selectAllImage($slug = FALSE){
+					$this->db->select('*');
+					$this->db->from('imagees');
+
+					$this->db->join('articles', 'articles.id_article = imagees.id_article');
+					//	 $this->db->where('images.id_article', $id);
+						  $this->db->where('articles.slug', $slug);
+				//	$this->db->where('articles.user_id', $user_id);
+						//$this->db->select('title, body,id_article ,id,slug');
+
+				//	$query = $this->db->get('articles');
+
+ $query = $this->db->get();
+									return $query->result_array();
+
+				}
+
+
+
 				 public function selectArticleall($slug = FALSE){
 
 					if ($slug === FALSE)

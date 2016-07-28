@@ -537,19 +537,38 @@ class user_controller extends CI_Controller{
                        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
                 	   $this->form_validation->set_rules('title', 'title', 'required');
                      $this->form_validation->set_rules('content', 'content', 'required');
-                     $this->form_validation->set_rules('img', 'Img', 'callback_imgCheck');
+                     //$this->form_validation->set_rules('img', 'Img', 'callback_imgCheck');
 
                          if ($this->form_validation->run() == FALSE) {
 
                           $this->load->view('addarticle');
 
                          }else {
-                           $config['upload_path'] ='./uploads/';
+                           $files = $_FILES;
+                                $cpt = count($_FILES['img']['name']);
+                                 for($i=0; $i<$cpt; $i++)
+                                {
+                                   $this->load->library('upload');
+                                $_FILES['img']['name']= $files['img']['name'][$i];
+                                $_FILES['img']['type']= $files['img']['type'][$i];
+                                $_FILES['img']['tmp_name']= $files['img']['tmp_name'][$i];
+                                 $_FILES['img']['error']= $files['img']['error'][$i];
+                                 $_FILES['img']['size']= $files['img']['size'][$i];
+                                $this->upload->initialize($this->set_upload_options());
+                                $this->upload->do_upload('img');
+                                $fileName = $_FILES['img']['name'];
+                                 $images[] = $fileName;
+
+
+
+                    }
+
+                        /*   $config['upload_path'] ='./uploads/';
                            $this->upload->initialize($config);
                            $this->load->library('upload', $config);
                            $data_upload_files = $this->upload->data();
                            $image = $data_upload_files['full_path'];
-                           $image=$image.$_FILES['img']['name'];
+                           $image=$image.$_FILES['img']['name'];*/
 
                           // $this->User_model->changeImage($id,$image);
 
@@ -573,13 +592,15 @@ $data = $this->security->xss_clean($data);
 $user_model_bool  =$this->User_model->addArticle($data);
 $this->User_model->getID_article($title);
 	$id_article=$this->session->id_article;
+  for($i=0; $i<$cpt; $i++)
+ {
   $data=array(
     'id_article '=>	$id_article,
-    'image'=>$image,
+    'image'=>'./uploads/'.$images[$i],
 
 
      );
-$this->User_model->insertImage($data);
+$this->User_model->insertImage($data);}
 $this->session->added=1;
 
 $this->load->view('addarticle');
@@ -669,6 +690,7 @@ $this->load->view('allarticle',$data);
 public function view($slug = NULL)
 {
 $data['news_item'] = $this->User_model->selectArticleall($slug);
+$photos['photo']=$this->User_model->selectAllImage($slug);
 
 if (empty($data['news_item']))
 {
@@ -678,7 +700,10 @@ if (empty($data['news_item']))
 $data['title'] = $data['news_item']['title'];
 
 $this->load->view('loginheader', $data);
-$this->load->view('view', $data);
+echo"<br><br><br>";
+
+
+$this->load->view('view', $photos,$data);
 $this->load->view('footer');
 }
 public function userarticle(){

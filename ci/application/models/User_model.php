@@ -317,7 +317,7 @@ $id=$this->session->id;
 					$this->db->select('*');
 					$this->db->from('articles');
 					$this->db->join('reg', 'reg.id = articles.id');
-					$this->db->join('imagees', 'imagees.id_article = articles.id_article');
+			//		$this->db->join('imagees', 'imagees.id_article = articles.id_article');
 				$this->db->where('reg.id', $id);
 						//$this->db->select('title, body,id_article ,id,slug');
 
@@ -373,7 +373,7 @@ $query = $this->db->get();
 					 $this->db->select('*');
 					 $this->db->from('articles');
 					 $this->db->join('reg', 'reg.id = articles.id');
-					 $this->db->join('imagees', 'imagees.id_article = articles.id_article');
+					// $this->db->join('imagees', 'imagees.id_article = articles.id_article');
 				 //	$this->db->where('articles.user_id', $user_id);
 						 //$this->db->select('title, body,id_article ,id,slug');
 
@@ -385,7 +385,7 @@ $query = $this->db->get();
 				 $this->db->select('*');
 				 $this->db->from('articles');
 
-					 $this->db->join('imagees', 'imagees.id_article = articles.id_article');
+					// $this->db->join('imagees', 'imagees.id_article = articles.id_article');
 				 $this->db->where('articles.slug', $slug);
 				 $query = $this->db->get();
 

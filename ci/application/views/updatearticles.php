@@ -112,10 +112,20 @@
 
                                     <h3><?php echo $news_item['title']; ?></h3>
                                     <div class="main">
-                                            <?php echo $news_item['body']; ?>
+
 
                                     </div>
-                                        <p><a href="<?php echo site_url('user_controller/updateArticle/'.$news_item['id_article']); ?>">Edit article</a></p>
+                                    <?php
+                                    $string=$news_item['body'];
+                                    if(strlen($string) >= 100){
+                                    // limit it to 5
+                                    $string = substr($string, 0, 270);
+                                    }
+
+                                    ?>
+                                     <?php echo $string; ?>
+<br>
+                                     <a href="<?php echo site_url('user_controller/updateArticle/'.$news_item['id_article']); ?>">Edit article</a></p>
 
                                 <?php endforeach; ?>
                         </div>

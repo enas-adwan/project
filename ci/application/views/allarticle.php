@@ -34,7 +34,15 @@ foreach ($articles as $news_item): ?>
 
        <h3><?php echo $news_item['title']; ?></h3>
      <div class="main">
-    <?php echo $news_item['body']; ?>
+<?php
+$string=$news_item['body'];
+if(strlen($string) >= 100){
+// limit it to 5
+$string = substr($string, 0, 270);
+}
+
+?>
+    <label ><?php echo $string; ?></lable>
                 <br>
             Author:    <?php echo $news_item['name']; ?>
 

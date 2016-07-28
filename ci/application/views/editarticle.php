@@ -158,19 +158,21 @@ $this->session->unset_userdata('updated');
                    <div class="col-xs-5 col-md-3">
                      <div class="form-group">
 
-                       <button type="submit" class="btn btn-primary" >Publish</button>
+
                      </div>
 
                      <div class="form-group">
                        <label for="image">Image</label>
                        <input type="file" id="image" class="form-control"  name="img" value="<?php echo $news_item['image'] ;?>"/>
                          <?php echo form_error('img'); ?>
+                              <button type="submit" class="btn btn-primary" >Publish</button>
                        <p class="help-block">Image definitions</p>
                      </div>
                      <a href="#" class="thumbnail">
 
                        <img    src="<?php echo base_url($image); ?>">
                      </a>
+
                   <!--   <a href="#" class="thumbnail">
                        <img src="http://fakeimg.pl/300/">
                      </a>-->

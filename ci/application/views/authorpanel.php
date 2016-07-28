@@ -83,7 +83,7 @@
                     <a href="<?php echo base_url('User_controller/authorViewArticle')?>">Edit your Articles</a>
                 </li>
                 <li>
-                    <a href="#">Events</a>
+                          <a href="<?php echo base_url('User_controller/multiImage')?>">Events</a>
                 </li>
                 <li>
                     <a href="#">About</a>

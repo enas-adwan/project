@@ -20,6 +20,8 @@ class user_controller extends CI_Controller{
    $this->load->model('User_model');
    $this->load->library('form_validation');
    $this->load->helper('test');//helper done by me to test input to prevent script and html injection
+
+
   }
 
 
@@ -420,6 +422,48 @@ class user_controller extends CI_Controller{
           $this->load->view('footer');
      }
 
+     public function multiImage(){
+
+        $this->load->view('multiimage');
+
+
+     }
+     public function trymulti(){
+
+
+
+
+       $files = $_FILES;
+            $cpt = count($_FILES['img']['name']);
+             for($i=0; $i<$cpt; $i++)
+            {
+               $this->load->library('upload');
+            $_FILES['img']['name']= $files['img']['name'][$i];
+            $_FILES['img']['type']= $files['img']['type'][$i];
+            $_FILES['img']['tmp_name']= $files['img']['tmp_name'][$i];
+             $_FILES['img']['error']= $files['img']['error'][$i];
+             $_FILES['img']['size']= $files['img']['size'][$i];
+            $this->upload->initialize($this->set_upload_options());
+            $this->upload->do_upload('img');
+            $fileName = $_FILES['img']['name'];
+             $images[] = $fileName;
+
+
+
+}
+
+
+     }
+     public function set_upload_options()
+{
+  $config = array();
+           $config['upload_path'] = './uploads/'; //give the path to upload the image in folder
+           $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '0';
+           $config['overwrite'] = FALSE;
+    return $config;
+}
+
 
        /**
         * for checking image
@@ -607,6 +651,7 @@ public function home(){
 
 $data['articles']=$this->User_model->selectArticleall();
 
+
 $this->load->view('articles',$data);
    $this->load->view('footer');
 }
@@ -764,7 +809,7 @@ $this->load->view('updatearticles',$data);*/
 
 }}}
 
-public function set_upload_options()
+/*public function set_upload_options()
 {
     //upload an image options
     $config = array();
@@ -775,7 +820,7 @@ public function set_upload_options()
     //$config['overwrite']     = FALSE;
 
     return $config;
-}
+}*/
 
 
 

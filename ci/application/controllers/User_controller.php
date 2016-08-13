@@ -725,11 +725,12 @@ $this->load->view('editarticles',$data);
 
 }
 public function authorViewArticle(){
-
+//  $data['news_item'] = $this->User_model->selectArticleall($slug);
+  $photos['photo']=$this->User_model->selectAllImage();
 
 $data['articles']=$this->User_model->selectArticle();
 
-$this->load->view('updatearticles',$data);
+$this->load->view('updatearticles',$data,$photos);
 
 }
 
@@ -742,9 +743,13 @@ redirect('User_controller/editArticles','refresh');
 
 }
 public function updateArticle($id){
+  $photos['photo']=$this->User_model->selectAllImageid($id);
+
 
 $data['news_item']=$this->User_model->updateArticle($id);
-$this->load->view('editarticle',$data);
+//$this->load->view('view', $photos,$data);
+$this->load->view('editarticle',$photos,$data);
+
    $this->load->view('footer');
 //$this->session->deleted=1;
 //redirect('User_controller/editArticles','refresh');
@@ -763,9 +768,12 @@ public function updateArticleelement($id_article= NULL){
 
            if ($this->form_validation->run() == FALSE) {
 
-             $data['news_item']=$this->User_model->updateArticle($id_article);
-             $this->load->view('editarticle',$data);
+             $photos['photo']=$this->User_model->selectAllImageid($id);
 
+
+           $data['news_item']=$this->User_model->updateArticle($id);
+           //$this->load->view('view', $photos,$data);
+           $this->load->view('editarticle',$photos,$data);
            }else {
 
             // $this->User_model->changeImage($id,$image);
@@ -790,6 +798,7 @@ $title=testInput($this->input->post('title'));
 $data = $this->security->xss_clean($data);
 $user_model_bool  =$this->User_model->updateArticleElement($res);
 $data['news_item']=$this->User_model->updateArticle($id_article);
+
 if($_FILES['img']['name']){
 $config['upload_path'] ='./uploads/';
 $this->upload->initialize($config);
@@ -812,7 +821,13 @@ $this->User_model->updateArticleImage($ress);
 }
 
 $this->session->updated=1;
-$this->load->view('editarticle',$data);
+$photos['photo']=$this->User_model->selectAllImageid($id);
+
+
+$data['news_item']=$this->User_model->updateArticle($id);
+//$this->load->view('view', $photos,$data);
+$this->load->view('editarticle',$photos,$data);
+//$this->load->view('editarticle',$data);
 
 //$this->User_model->getID_article($title);
 //$id_article=$this->session->id_article;

@@ -1,7 +1,27 @@
 
 <?php
-$this->session->updateid=$news_item['id_article'] ;
-$image=$news_item['image'];
+foreach ($photo as $reso => $listt) {
+
+  $image= $listt['image'];
+  $title= $listt['title'];
+  $id= $listt['id_article'];
+
+  $body= $listt['body'];
+
+
+
+  //$title=$listt['title'];
+
+}
+
+//$image=$news_item['image'];
+
+//  echo "<br /><br /><img  id='previewing' width='200' height='200' src='".base_url($image)."' alt='Profile Pic'>";
+//echo '<h2>'.$news_item['title'].'</h2>';
+//echo $news_item['body'];
+
+//$this->session->updateid=$news_item['id_article'] ;
+//$image=$news_item['image'];
 
 ?>
 
@@ -133,24 +153,34 @@ $this->session->unset_userdata('updated');
                     <div class="col-lg-12">
                       <h1 class="page-header">Update your Article</h1>
                       <?php
+          //  $info=array('id'=>'reg',
+                      //  'name'=>'reg'
+                      //  );
+
+
+                    //  echo form_open_multipart('User_controller/updateArticleelement/$news_item['id_article'] ');
+                echo form_open_multipart(site_url('user_controller/updateArticleelement/'.$id));
+                      ?>
+
+                      <?php
                     //  $info=array('id'=>'reg',
                                 //  'name'=>'reg'
                                 //  );
 
 
                               //  echo form_open_multipart('User_controller/updateArticleelement/$news_item['id_article'] ');
-                          echo form_open_multipart(site_url('user_controller/updateArticleelement/'.$news_item['id_article']));
+                        //  echo form_open_multipart(site_url('user_controller/updateArticleelement/'.$news_item['id_article']));
                                 ?>
 
                  <div class="form-group">
                    <label for="title">Title</label>
-                   <input type="text"  id="title" name="title" value="<?php echo $news_item['title'] ;?>" class="form-control">
+                   <input type="text"  id="title" name="title" value="<?php echo $title ;?>" class="form-control">
                      <?php echo form_error('title'); ?>
                  </div>
                  <div class="row">
                    <div class="col-xs-12 col-sm-7 col-md-9">
                      <div class="form-group">
-                       <textarea name="content" id="content" style="width:100% ; height:500px ;" ><?php echo $news_item['body'] ;?></textarea>
+                       <textarea name="content" id="content" style="width:100% ; height:500px ;" ><?php echo $body ;?></textarea>
                        <script>CKEDITOR.replace('content');</script>
                          <?php echo form_error('content'); ?>
                      </div>
@@ -163,14 +193,45 @@ $this->session->unset_userdata('updated');
 
                      <div class="form-group">
                        <label for="image">Image</label>
-                       <input type="file" id="image" class="form-control"  name="img" value="<?php echo $news_item['image'] ;?>"/>
-                         <?php echo form_error('img'); ?>
-                              <button type="submit" class="btn btn-primary" >Publish</button>
-                       <p class="help-block">Image definitions</p>
+
+                       <input type="file" id="image" class="form-control"  name="img"/>
+                            <button type="submit" class="btn btn-primary" >Publish</button>
+                         <?php
+
+
+
+
+                         foreach ($photo as $reso => $listt) {
+
+                           $image= $listt['image'];
+                           $title= $listt['title'];
+                           $body= $listt['body'];
+                         echo "<br /><br /><img  id='previewing' width='200' height='200' src='".base_url($image)."' alt='Profile Pic'>";
+
+                           //$title=$listt['title'];
+
+                         }
+
+                         //$image=$news_item['image'];
+
+                         //  echo "<br /><br /><img  id='previewing' width='200' height='200' src='".base_url($image)."' alt='Profile Pic'>";
+                         //echo '<h2>'.$news_item['title'].'</h2>';
+                         //echo $news_item['body'];
+                         echo "<br>";
+
+                         echo"<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>";
+                         //$this->session->updateid=$news_item['id_article'] ;
+                         //$image=$news_item['image'];
+
+                         ?>
+
+
+
+
                      </div>
                      <a href="#" class="thumbnail">
 
-                       <img    src="<?php echo base_url($image); ?>">
+
                      </a>
 
                   <!--   <a href="#" class="thumbnail">
